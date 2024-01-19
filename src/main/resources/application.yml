@@ -1,0 +1,47 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: spring
+        uri: http://localhost:8081
+        predicates:
+          - Path=/api/v1/user/search/{name}
+      - id: spring
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/user/{loggedInUserId}/chat-list
+      - id: spring
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/user/login
+      - id: spring
+        uri: http://localhost:8081
+        predicates:
+         - Path=/api/v1/user/save
+      - id: spring
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/user/search/all
+      - id: spring
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/user/{loggedInUserId}/add-contact/{contactUserId}
+      - id: spring
+        uri: http://localhost:8081
+        predicates:
+        - Path=/api/v1/user/selected-user/{selectedUserId}
+
+httpserver:
+  wiretap: true
+httpclient:
+  wiretap: true
+
+logging:
+  level:
+    root: error
+#    reactor.netty: trace
+    org.springframework.cloud.gateway: trace
+    org.springframework.http.server.reactive: trace
+
+server:
+  port: 8080
